@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Banner Stream HUD BVB Fusion</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Arial Black', Impact, sans-serif;
+    }
+
+    body {
+      background-color: transparent;
+      display: flex;
+      justify-content: flex-start; /* FIXA TUDO NO CANTO ESQUERDO */
+      align-items: center;
+      min-height: 100vh;
+      padding-left: 20px; /* Margem do canto da tela */
+      overflow: hidden;
+    }
+
+    /* Container HUD com expansão ancorada na esquerda */
+    .banner-hud {
+      position: relative;
+      height: 48px;
+      background: linear-gradient(90deg, #0f0203 0%, #2e0004 60%, #0f0203 100%);
+      border: 1.5px solid #ff1e27;
+      border-radius: 8px;
+      transform: skewX(-12deg);
+      transform-origin: left center; /* O BANNER SÓ ABRE PRA DIREITA */
+      box-shadow: 0 0 14px rgba(255, 30, 39, 0.8);
+      display: flex;
+      align-items: center;
+      padding: 0 4px;
+      overflow: hidden;
+      animation: expandDynamic 9s cubic-bezier(0.25, 1, 0.5, 1) infinite;
+    }
+
+    @keyframes expandDynamic {
+      0%, 8% {
+        width: 48px; /* Fica no canto só do tamanho do ícone */
+      }
+      18%, 46% {
+        width: 225px; /* Tamanho justo para VEM PRA BVB FUSION */
+      }
+      54%, 86% {
+        width: 260px; /* Tamanho justo para o DISCORD */
+      }
+      94%, 100% {
+        width: 48px; /* Recolhe de volta pro canto */
+      }
+    }
+
+    /* Ajuste de conteúdo interno */
+    .banner-content {
+      transform: skewX(12deg);
+      height: 100%;
+      display: flex;
+      align-items: center;
+      position: relative;
+      width: 100%;
+    }
+
+    /* Foto do Touro (Mascote recortado/estilo Badge) */
+    .avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 6px;
+      border: 1.5px solid #ff1e27;
+      overflow: hidden;
+      flex-shrink: 0;
+      background: #000;
+      z-index: 10;
+      box-shadow: 0 0 10px rgba(255, 30, 39, 0.8);
+    }
+
+    .avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* Área dos textos */
+    .text-area {
+      position: relative;
+      flex-grow: 1;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      margin-left: 10px;
+      overflow: hidden;
+    }
+
+    .panel {
+      position: absolute;
+      display: flex;
+      align-items: center;
+      white-space: nowrap;
+    }
+
+    /* Animação dos Painéis */
+    .panel-1 {
+      animation: switchText1 9s cubic-bezier(0.25, 1, 0.5, 1) infinite;
+    }
+
+    .panel-2 {
+      animation: switchText2 9s cubic-bezier(0.25, 1, 0.5, 1) infinite;
+    }
+
+    @keyframes switchText1 {
+      0%, 14% {
+        opacity: 0;
+        transform: translateX(-15px);
+      }
+      20%, 44% {
+        opacity: 1;
+        transform: translateX(0);
+      }
+      48%, 100% {
+        opacity: 0;
+        transform: translateX(15px);
+      }
+    }
+
+    @keyframes switchText2 {
+      0%, 50% {
+        opacity: 0;
+        transform: translateX(-15px);
+      }
+      56%, 84% {
+        opacity: 1;
+        transform: translateX(0);
+      }
+      90%, 100% {
+        opacity: 0;
+        transform: translateX(15px);
+      }
+    }
+
+    /* Estilo dos Textos */
+    .text-group {
+      display: flex;
+      flex-direction: column;
+      line-height: 1;
+    }
+
+    .sub-title {
+      color: #ffffff;
+      font-size: 10px;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+    }
+
+    .main-title {
+      color: #ff1e27;
+      font-size: 14px;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      text-shadow: 0 0 8px rgba(255, 30, 39, 0.9);
+      margin-top: 1px;
+    }
+
+    /* Estilo do Discord */
+    .dc-box {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .dc-tag {
+      background: #ff1e27;
+      color: #fff;
+      font-size: 9px;
+      padding: 2px 5px;
+      border-radius: 3px;
+      font-weight: bold;
+      letter-spacing: 0.5px;
+    }
+
+    .dc-link {
+      color: #ffffff;
+      font-size: 12px;
+      letter-spacing: 0.3px;
+    }
+
+    .dc-link span {
+      color: #ff1e27;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="banner-hud">
+    <div class="banner-content">
+      
+      <div class="avatar">
+        <img src="logo.png" alt="BVB Touro">
+      </div>
+
+      <div class="text-area">
+        
+        <div class="panel panel-1">
+          <div class="text-group">
+            <span class="sub-title">VEM PRA</span>
+            <span class="main-title">BVB FUSION</span>
+          </div>
+        </div>
+
+        <div class="panel panel-2">
+          <div class="dc-box">
+            <span class="dc-tag">DISCORD</span>
+            <span class="dc-link"><span>discord.gg/</span>AYNmqZ7d3</span>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+</body>
+</html>
